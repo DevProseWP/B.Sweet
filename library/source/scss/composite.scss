@@ -1,0 +1,39 @@
+ul.products li {
+    @media (min-width: 768px) and (max-width: 1029px) {
+        font-size: .85rem !important;
+
+       p.details_btn {
+            margin: 0 0 1.75em !important;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        ul.products li {
+            font-size: 0.85rem !important;
+            padding: 0px !important;
+            overflow: hidden !important;
+        }
+
+        p.details_btn {
+            position: relative;
+            width: 100%;
+            top: 0;
+            height: 44px;
+            padding: 10px 0 !important;
+            margin: 0px !important;
+        }
+
+        .ajax-flag-quota {
+            width: 100% !important;
+            margin: 0px;
+            padding: 0px;
+            clear: both;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        font-size: .85rem !important;
+    }
+
+    @media only screen and (max-width: 320px) {}
+}

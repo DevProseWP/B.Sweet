@@ -1,0 +1,44 @@
+<code class="const-banner">woocomerce.php</code>
+<?php get_header('bare'); ?>
+
+
+<div class="featured-image-fallback">
+				<div id="featured-image">
+					<div id="logo">
+						<h1><a href="<?php echo home_url(); ?>" rel="nofollow"><?php bloginfo('name'); ?></a></h1>
+					</div>
+				</div>
+			</div>
+
+			<header class="article-header">
+
+				<!-- <h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1> -->
+				<h1 class="page-title" itemprop="headline">Shop</h1>
+
+				<!-- <p><?php the_excerpt(); ?></p> -->
+				<p>Choose your perfect basket</p>
+
+			</header> <?php // end article header ?>
+
+			<div id="content">
+
+				<div id="inner-content" class="wrap cf">
+
+						<main id="main" class="m-all t-all cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+
+							<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+
+								<section class="entry-content cf content-container" itemprop="articleBody">
+									<a href="#" class="back-link">Back</a>
+									<?php woocommerce_content(); ?>
+								</section>
+
+							</article>
+
+						</main>
+
+				</div>
+
+			</div>
+
+<?php get_footer('bare'); ?>

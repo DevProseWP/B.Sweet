@@ -1,0 +1,125 @@
+/******************************************************************
+Site Name: B.SWEET
+Author: MTMD
+
+Stylesheet: Login Stylesheet
+
+******************************************************************/
+html {
+  background: #f9f9f9;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+body {
+  height: auto;
+  background: none;
+  font-family: 'Playfair Display', serif; }
+
+body.login {
+  margin-top: 50px; }
+
+.login #login_error,
+.login .message {
+  position: absolute;
+  padding: 15px 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  border-left: none; }
+
+.login .message {
+  border-bottom: 4px solid #00a0d2; }
+
+.login #login_error {
+  border-bottom: 4px solid #dc3232; }
+
+/* the form box */
+/*
+This is the Wordpress logo in the admin area.
+You'll have to load your own images and mess
+with the width and height.
+*/
+.login h1 a {
+  background: url("../../library/images/logo/new-logo/logo.png") no-repeat top center;
+  /* make sure to replace this! */
+  background-size: contain;
+  width: 326px;
+  height: 67px;
+  text-indent: -9999px;
+  overflow: hidden;
+  padding-bottom: 15px;
+  display: block;
+  margin: 0;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em; }
+
+.login form {
+  margin-left: 8px;
+  padding: 26px 24px 46px;
+  font-weight: normal;
+  background: white;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
+body form .input {
+  width: 97%;
+  padding: 3px;
+  margin-top: 2px;
+  margin-right: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #E5E5E5;
+  background: #FBFBFB;
+  outline: none;
+  box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2); }
+
+.login form .input, .login input[type=text] {
+  font-size: 16px;
+  text-align: center;
+  padding: 8px;
+  box-shadow: none;
+  outline: none;
+  color: #444; }
+
+.login input[type=password] {
+  font: large Verdana,sans-serif;
+  font-weight: bolder;
+  letter-spacing: 2px; }
+
+input[type=text]:focus, input[type=password]:focus {
+  border-color: #3db4a2; }
+
+/*
+You'll have to override some of the default styles
+but since we're referencing the id, it should be easy.
+*/
+#wp-submit {
+  background: #ccc;
+  color: #444;
+  border: none;
+  height: 40px;
+  width: 80px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  text-decoration: none;
+  text-shadow: none;
+  transition: background 0.3s ease; }
+  #wp-submit:hover {
+    background: #bbb; }
+
+/*
+retina login logo
+*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+  .login h1 a {
+    background: url("../../library/images/logo/new-logo/logo.png") no-repeat top center;
+    /* make sure to replace this! */
+    background-size: contain;
+    margin: 0;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em; } }

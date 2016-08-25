@@ -1,0 +1,113 @@
+#progress-bar {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 10px; }
+
+.progress-bar-inner {
+  background: #3498db;
+  padding: 5px;
+  position: relative;
+  overflow: hidden; }
+
+.progress-bar-advancer {
+  transition: .5s;
+  background: #65b42c;
+  width: 0%;
+  height: 40px;
+  float: left; }
+
+.progress-indicator {
+  position: absolute;
+  font-weight: bold;
+  color: #666;
+  font-size: 1.5em;
+  left: 10px; }
+
+.product_size {
+  padding: 2px;
+  background: #777;
+  color: #fff;
+  text-align: center; }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .progress-indicator {
+    position: absolute;
+    font-weight: bold;
+    color: #666;
+    font-size: 1em;
+    left: 10px; } }
+
+/* Edit */
+#progress-bar {
+  width: 100%;
+  background: #eee;
+  border: 1px solid #eee;
+  padding: 0;
+  border-radius: 3px;
+  height: 89px; }
+
+.progress-bar-inner {
+  background: #fff;
+  padding: 0px;
+  position: relative;
+  overflow: hidden;
+  overflow: visible; }
+
+.progress-bar-advancer {
+  transition: .5s;
+  background: #3498db;
+  width: 0%;
+  height: 40px;
+  border-radius: 3px 3px 0 0;
+  float: left; }
+
+.progress-indicator {
+  position: absolute;
+  font-weight: normal;
+  color: #333 !important;
+  font-size: 1.25em;
+  left: 0;
+  top: 40px;
+  padding: 8px 0;
+  background: #fff;
+  width: 100%;
+  text-align: center; }
+
+.product_size {
+  padding: 2px;
+  background: #777;
+  color: #fff;
+  text-align: center; }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .progress-indicator {
+    position: absolute; } }
+
+@media (min-width: 768px) and (max-width: 1029px) {
+  ul.products li {
+    font-size: .85rem !important; }
+    ul.products li p.details_btn {
+      margin: 0 0 1.75em !important; } }
+
+@media only screen and (max-width: 768px) {
+  ul.products li ul.products li {
+    font-size: 0.85rem !important;
+    padding: 0px !important;
+    overflow: hidden !important; }
+  ul.products li p.details_btn {
+    position: relative;
+    width: 100%;
+    top: 0;
+    height: 44px;
+    padding: 10px 0 !important;
+    margin: 0px !important; }
+  ul.products li .ajax-flag-quota {
+    width: 100% !important;
+    margin: 0px;
+    padding: 0px;
+    clear: both; } }
+
+@media only screen and (max-width: 480px) {
+  ul.products li {
+    font-size: .85rem !important; } }

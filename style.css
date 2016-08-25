@@ -1,0 +1,18 @@
+/******************************************************************
+Theme Name: B.Sweet
+Theme URI: http://www.mtmd.io
+Github Theme URI: https://github.com/MethodToMyDesign/B.Sweet
+Description: This is a custom theme made for B.Sweet made by Method To My Design, you can contact me  <a href="https://github.com/eddiemachado/bones/issues" title="Bones Issues">here</a> for more information.
+Author: Method To My Design
+Author URI: http://www.mtmd.io
+Version: 1.0
+Tags: fluid-layout, responsive-layout, accessibility-ready, translation-ready, microformats, rtl-language-support, WooCommerce optimized
+******************************************************************/
+
+
+.sticky {}          /* DO NOT EDIT THIS */
+.gallery-caption {} /* THESE ARE USELESS */
+.bypostauthor {}    /* THEY ARE ONLY TO KEEP THEME CHECK HAPPY */
+
+
+.hide {display:none;}
