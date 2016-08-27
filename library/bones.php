@@ -151,6 +151,7 @@ function bones_scripts_and_styles() {
 		wp_enqueue_script( 'bones-modernizr' );
 		wp_enqueue_script( 'bones-sticky' );
 		wp_enqueue_style( 'bones-stylesheet' );
+		wp_enqueue_style( 'after-style' );
 		wp_enqueue_style( 'quota-styles' );
 		wp_enqueue_style( 'bones-ie-only' );
 

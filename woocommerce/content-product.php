@@ -46,13 +46,13 @@ $woocommerce_loop['loop']++;
 // Extra post classes
 $classes = array();
 if ( 0 === ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 === $woocommerce_loop['columns'] ) {
-	$classes[] = 'first';
+	$classes[] = 'first product ';
 }
 if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
-	$classes[] = 'last';
+	$classes[] = 'last product ';
 }
 
-
+if (!in_array("product", $classes)) $classes[]='product';
 
 
 ?>

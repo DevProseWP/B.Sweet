@@ -135,4 +135,21 @@ jQuery(function($) {
         updateProgress(); 
    });
 
+   $(document).on('change', '.subcat-selector', function(event) {
+    event.preventDefault();
+    var target = $(this).data('target');
+    var request = {
+        'action': 'update_sub_cat',
+        'showcat': $(this).val(),
+        'target': target
+    };
+    $.post('/wp-admin/admin-ajax.php ', request, function(data) {
+     
+            $('#group-'+target).html('').html(data);
+  
+ 
+    });
+   });
+
+
 });

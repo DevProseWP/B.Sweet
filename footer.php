@@ -35,7 +35,7 @@
 			</footer>
 
 		</div>
-
+<?php echo admin_url( 'admin-ajax.php' ); ?>
 		<?php // all js scripts are loaded in library/bones.php ?>
 		<?php wp_footer(); ?>
 
