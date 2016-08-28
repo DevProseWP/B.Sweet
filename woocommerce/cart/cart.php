@@ -42,9 +42,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 		<?php do_action( 'woocommerce_before_cart_contents' ); 
 		$items = WC()->cart->get_cart();
 		if(isset($items[key($items)]['composite_data'])) { $custom_basket = true; $basket_id = $items[key($items)]['composite_data'][key($items[key($items)]['composite_data'])]['product_id']; } else { $custom_basket = false; };
-
-
-
 		?>
 
 		<?php

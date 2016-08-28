@@ -32,8 +32,7 @@ jQuery(function($) {
             console.log((items) / maximum_items);
             var percent = (Math.floor(((items) / maximum_items)*100));
             if (percent == 100) {
-                      $('.progress-bar-advancer').css('width', percent+'%');
-                      $('.progress-indicator').html(notification_basket_full).css('color', 'white');
+                     $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
                     } else {
             $('.progress-bar-advancer').css('width', percent+'%');
             $('.progress-indicator').html(notification_progress_text.replace('{#}',(maximum_items - items))).css('color', 'white');
@@ -100,7 +99,7 @@ jQuery(function($) {
             fireError(notification_no_room);
             event.stopImmediatePropagation();
         } else if ((items_in_cart) == maximum_items) {
-           $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward">'+notification_progress_checkout+'</a>');
+           $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
 
             event.stopImmediatePropagation();
         }  else if (item_size > max_size) {
@@ -154,11 +153,13 @@ jQuery(function($) {
         'showcat': $(this).val(),
         'target': target
     };
-     $('#group-'+target).fadeOut('fast');
+     $('.group-'+target+' .working').css('display', 'block');
+     $('#group-'+target+' ul').css('opacity', '0');
+
     $.post('/wp-admin/admin-ajax.php ', request, function(data) {
-     
+            $('.group-'+target+' .working').css('display', 'none');
             $('#group-'+target).html('').html(data);
-            $('#group-'+target).fadeIn('fast');
+                $('#group-'+target+' ul').css('opacity', '1');
       });
    });
 

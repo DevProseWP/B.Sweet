@@ -72,7 +72,18 @@ function productGroup($atts) {
 	wp_reset_postdata();
 	WC()->query->remove_ordering_args();
 	if(!$a['echo']) {
-		return '<div class="woocommerce columns-' . $columns . '">' . $child_selector . '<div class="product_group" id="group-'.$cur_term->term_id.'">' . ob_get_clean() . '</div></div>';
+		return '<div class="woocommerce ajax-container group-'.$cur_term->term_id.' columns-' . $columns . '">' . $child_selector . '<div class="working">
+		<div class="cssload-loader">
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+			<div class="cssload-side"></div>
+		</div>
+		</div><div class="product_group" id="group-'.$cur_term->term_id.'">' . ob_get_clean() . '</div></div>';
 	} else {
 		return ob_get_clean();
 	}
@@ -182,4 +193,20 @@ function wc_cart_item_name_hyperlink( $link_text, $cart_item ) {
 }
 /* Filter to override cart_item_name */
 add_filter( 'woocommerce_cart_item_name', 'wc_cart_item_name_hyperlink', 10, 2 );
+
+
+function wc_get_basket_thumb_maybe($product_get_image,  $cart_item) {
+		if(isset($cart_item['composite_data'])) {
+			$_temp = new WC_Product($cart_item['composite_data'][key($cart_item['composite_data'])]['product_id']);
+			remove_filter( 'woocommerce_cart_item_thumbnail', 'wc_get_basket_thumb_maybe');
+ 			$product_get_image = apply_filters( 'woocommerce_cart_item_thumbnail', $_temp->get_image(), $cart_item, $cart_item_key );
+ 			add_filter('woocommerce_cart_item_thumbnail', 'wc_get_basket_thumb_maybe', 10, 2);
+
+	 }
+		return $product_get_image; 
+		
+
+}
+
+add_filter('woocommerce_cart_item_thumbnail', 'wc_get_basket_thumb_maybe', 10, 2);
 ?>

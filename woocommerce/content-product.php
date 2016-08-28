@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product, $woocommerce_loop, $basket_max_prod_size, $building_basket;
+
 $this_volume = (get_field('product_volume')) ? get_field('product_volume') : 1; 
 $this_size = (get_field('product_size')) ? get_field('product_size') : 1;
 
@@ -76,7 +77,7 @@ if (!in_array("product", $classes)) $classes[]='product';
 	?>
 
 
-	<?php if ($building_basket) { ?>
+	<?php if ($building_basket || $woocommerce_loop['echo']) { ?>
 	<div class="product_size">Product Size: <?php echo $this_size; ?></div>
 
 	<?php }

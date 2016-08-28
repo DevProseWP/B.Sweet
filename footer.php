@@ -35,10 +35,20 @@
 			</footer>
 
 		</div>
-
+	
 		<?php // all js scripts are loaded in library/bones.php ?>
-		<?php wp_footer(); ?>
+		<?php wp_footer(); 
+		global $post;
+		$url = get_permalink($post->ID);
+	
 
+		 if ((WC()->session->get('building_basket') == "true")  && (  
+		 	(strpos($url, "/build" ) == false) &&
+		 	(strpos($url, "/checkout" ) == false) && 
+		 	(strpos($url, "/cart" ) == false)
+		 	)) { ?>
+			<div id="build-reminder"><a href="/build/choose-your-products/"><?php echo get_field('notification_basket_in_progress','option'); ?></a></div>
+		<?php } ?>
 
 	</body>
 
