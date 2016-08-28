@@ -143,13 +143,12 @@ jQuery(function($) {
         'showcat': $(this).val(),
         'target': target
     };
+     $('#group-'+target).fadeOut('fast');
     $.post('/wp-admin/admin-ajax.php ', request, function(data) {
      
             $('#group-'+target).html('').html(data);
-  
- 
-    });
+            $('#group-'+target).fadeIn('fast');
+      });
    });
-
 
 });

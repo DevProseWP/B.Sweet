@@ -1763,14 +1763,13 @@ a.button.component_options_load_more:after {
   background-color: #ddd; }
 
 .details_btn {
-  position: absolute;
+ 
   z-index: 77;
   display: block;
   padding: 14px 0;
   width: 50%;
   font-weight: 500px;
-  bottom: -28px;
-  right: 0;
+
   background-color: #d3d3d3;
   color: #444; }
 

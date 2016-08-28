@@ -194,3 +194,42 @@ background-position: 97.5% center;
 	}
 
 }
+
+.product_group {
+  position: relative
+}
+.working-cover {
+background: rgba(0,0,0,.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; 
+  left: 0;
+  z-index: 9999;
+
+}
+
+
+
+
+.ajax-flag-quota {
+
+display: block;
+  float: left;
+  
+}
+.details_link {
+  
+  width: 50%;
+display: block;
+  float: right;
+
+  p { margin: 0px !important}
+}
+
+.details_btn {
+
+width: 100%;
+padding: 10px 0;
+margin: 0px;
+}

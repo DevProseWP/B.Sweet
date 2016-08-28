@@ -106,7 +106,7 @@ if (!in_array("product", $classes)) $classes[]='product';
 	do_action( 'woocommerce_after_shop_loop_item' );
 	
 	?>
-	<a href="<?php echo get_permalink();?>">
+	<a href="<?php echo get_permalink();?>" class="details_link">
 		<p class="details_btn">
 		Details
 	</p>
