@@ -2,6 +2,13 @@
 
 /** custom shortcode for products page */
 
+function woocommerce_template_loop_product_thumbnail() {
+
+
+	echo woocommerce_get_product_thumbnail();
+
+}
+
 function productGroup($atts) {
 	
 	$a = shortcode_atts( array(
@@ -31,8 +38,8 @@ function productGroup($atts) {
 	}
 	$child_selector .= '
 	<option value="-1">Clear Filters</options>
-	</select>
-	</div>
+	</select
+>	</div>
 	';
 	}
 	$ordering_args = WC()->query->get_catalog_ordering_args( $a['orderby'], $a['order'] );
