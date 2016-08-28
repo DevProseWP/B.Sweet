@@ -128,13 +128,58 @@ function update_sub_cat() {
 	die();
 }
 
+/**
+ *  ACF Options Page
+ */
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Bsweet General Settings',
+		'menu_title'	=> 'Bsweet Settings',
+		'menu_slug' 	=> 'bsweet-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Bsweet Notification Settings',
+		'menu_title'	=> 'Notifications',
+		'parent_slug'	=> 'bsweet-general-settings',
+	));
+	
+
+	
+}
+
+
 
 /**
- *
- *
- *class="first post-1032 type-product status-publish has-post-thumbnail product_cat-all-product-categories product_cat-beach-and-bath taxable shipping-taxable purchasable product-type-variable product-cat-all-product-categories product-cat-beach-and-bath has-default-attributes has-children instock"
- *
- * class="first post-801 product type-product status-publish has-post-thumbnail product_cat-all-product-categories product_cat-toys taxable shipping-taxable purchasable product-type-simple product-cat-all-product-categories product-cat-toys instock"
+ * Head Filter to insert notification variables
  */
 
+add_action('wp_head','defineVariables');
+function defineVariables(){
+	$output = "\n<script>\n";
+	$output .= "var notification_add_products ='".get_field('notification_add_products','option')."';\n";
+	$output .= "var notification_basket_full ='".get_field('notification_basket_full','option')."';\n";
+	$output .= "var notification_progress_text ='".get_field('notification_progress_text','option')."';\n";
+	$output .= "var notification_choose_between ='".get_field('notification_choose_between','option')."';\n";
+	$output .= "var notification_no_room ='".get_field('notification_no_room','option')."';\n";
+	$output .= "var notification_too_big ='".get_field('notification_too_big','option')."';\n";
+	$output .= "var notifications_not_enough ='".get_field('notifications_not_enough','option')."';\n";
+	$output .= "var notification_progress_checkout ='".get_field('notification_progress_checkout','option')."';\n";
+	$output .= "</script>\n";
+	echo $output;
+}
+
+function wc_cart_item_name_hyperlink( $link_text, $cart_item ) {
+	if(isset($cart_item['composite_data'])) {
+		$title = get_the_title($cart_item['composite_data'][key($cart_item['composite_data'])]['product_id']);
+		return $title;
+	} else {
+    return  $cart_item['data']->get_title();
+	}
+}
+/* Filter to override cart_item_name */
+add_filter( 'woocommerce_cart_item_name', 'wc_cart_item_name_hyperlink', 10, 2 );
 ?>

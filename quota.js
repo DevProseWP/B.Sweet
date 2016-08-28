@@ -1,5 +1,7 @@
 jQuery(function($) {
-    $('#minmax').html("Choose between " + minimum_items + " - " + maximum_items + " products");
+    minmax = notification_choose_between.replace('{-#}', minimum_items);
+    minmax = minmax.replace('{+#}', maximum_items);
+    $('#minmax').html(minmax);
     function fireError(error){
         $('#message-box p').html(error);
         $('#message-box').fadeIn('fast', function() {
@@ -15,14 +17,14 @@ jQuery(function($) {
                 if (percent) {
                     if (percent == 100) {
                       $('.progress-bar-advancer').css('width', percent+'%');
-                      $('.progress-indicator').html('This basket is already filled to capacity.').css('color', 'white');
+                      $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
                     } else {
                       $('.progress-bar-advancer').css('width', percent+'%');
-                      $('.progress-indicator').html('Add up to <strong>'+(maximum_items - items)+'</strong> more products!').css('color', 'white');
+                      $('.progress-indicator').html(notification_progress_text.replace('{#}',(maximum_items - items))).css('color', 'white');
                     }
                 } else {
                  $('.progress-bar-advancer').css('width', percent+'%');
-                 $('.progress-indicator').html('Add Some Products!').css('color', '#333');
+                 $('.progress-indicator').html(notification_add_products).css('color', '#333');
                 }
         
         } else {
@@ -31,10 +33,10 @@ jQuery(function($) {
             var percent = (Math.floor(((items) / maximum_items)*100));
             if (percent == 100) {
                       $('.progress-bar-advancer').css('width', percent+'%');
-                      $('.progress-indicator').html('This basket is already filled to capacity.').css('color', 'white');
+                      $('.progress-indicator').html(notification_basket_full).css('color', 'white');
                     } else {
             $('.progress-bar-advancer').css('width', percent+'%');
-            $('.progress-indicator').html('Add up to <strong>'+(maximum_items - items)+'</strong> more products!').css('color', 'white');
+            $('.progress-indicator').html(notification_progress_text.replace('{#}',(maximum_items - items))).css('color', 'white');
             }
         }
   
@@ -57,21 +59,18 @@ jQuery(function($) {
 
     }
 
-
-
     $(document).on('click', '.single-ajax-add', function(event) {
         event.preventDefault();
         console.log(curr_quantity+" "+maximum_items);
         if ((curr_quantity + products_size) > maximum_items) {
-            fireError("Not Enough Room For This Product.");
+            fireError(notification_no_room);
             event.stopImmediatePropagation();
         } else if ((curr_quantity) == maximum_items) {
             console.log(curr_quantity+" "+maximum_items);
-            fireError("You can't have more than " + maximum_items +
-                " items in your basket.");
+            fireError(notification_basket_full);
             event.stopImmediatePropagation();
         }  else if (products_size > max_size) {
-            fireError("Item is too big for this basket.");
+            fireError(notification_too_big);
             event.stopImmediatePropagation();
         } else {
             curr_quantity = curr_quantity + products_size;
@@ -91,7 +90,6 @@ jQuery(function($) {
         event.preventDefault();
         item_size = $(this).parent('li').data('size');
 
-         console.log(items_in_cart+" "+maximum_items);
 
         if (($(this).hasClass('product_type_variable'))&& (items_in_cart < maximum_items)){
             event.stopImmediatePropagation();
@@ -99,14 +97,14 @@ jQuery(function($) {
         }
 
         if (((items_in_cart + item_size) > maximum_items) && (items_in_cart < maximum_items)) {
-            fireError("This Product is too big for this basket");
+            fireError(notification_no_room);
             event.stopImmediatePropagation();
         } else if ((items_in_cart) == maximum_items) {
-            fireError("You can't have more than " + maximum_items +
-                " items in your basket.");
+           $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward">'+notification_progress_checkout+'</a>');
+
             event.stopImmediatePropagation();
         }  else if (item_size > max_size) {
-           fireError("Item is too big for this basket.");
+           fireError(notification_too_big);
             event.stopImmediatePropagation();
         }    else {
             items_in_cart = items_in_cart + item_size;
@@ -123,7 +121,7 @@ jQuery(function($) {
         
         var counts = getCartCount();
         if (counts['items'] < minimum_items) {
-            fireError("You must have at least <strong>"+minimum_items+"</strong> in your basket.  Add some more!");
+            fireError(notifications_not_enough.replace('{#}',minimum_items));
             event.preventDefault();
             return false;
         } else {
@@ -131,6 +129,19 @@ jQuery(function($) {
         }
     });
    
+    $(document).on('click', '.buttons .checkout', function(event) {
+        
+        var counts = getCartCount();
+        if (counts['items'] < minimum_items) {
+            fireError(notifications_not_enough.replace('{#}',minimum_items));
+            event.preventDefault();
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+
    $(document).ready(function() {
         updateProgress(); 
    });
