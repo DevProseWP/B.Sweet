@@ -1,5 +1,19 @@
 <?php
 
+
+add_action('woocommerce_add_to_cart', 'catchBasketName');
+function catchBasketName($woo){
+if (isset($_POST['name_your_basket'])) 
+{
+
+		WC()->session->set('named_basket',$_POST['name_your_basket']);
+
+}
+return $woo;
+}
+
+
+
 /** custom shortcode for products page */
 
 function woocommerce_template_loop_product_thumbnail() {
@@ -102,7 +116,7 @@ function productGroup($atts) {
 	} else {
 
 		if($woocommerce_loop['displayed'] < 1) {
-			return'<h3>Nothing found</h3>' . $loop['loop'];
+			return'<h5>Nothing found</h5>' . $loop['loop'];
 		} else {
 	
 		 return ob_get_clean();
@@ -210,13 +224,14 @@ function defineVariables(){
 function wc_cart_item_name_hyperlink( $link_text, $cart_item ) {
 	if(isset($cart_item['composite_data'])) {
 		$title = get_the_title($cart_item['composite_data'][key($cart_item['composite_data'])]['product_id']);
+
 		return $title;
 	} else {
     return  $cart_item['data']->get_title();
 	}
 }
 /* Filter to override cart_item_name */
-add_filter( 'woocommerce_cart_item_name', 'wc_cart_item_name_hyperlink', 10, 2 );
+add_filter( 'woocommerce_cart_item_name', 'wc_cart_item_name_hyperlink', 15, 2 );
 
 
 function wc_get_basket_thumb_maybe($product_get_image,  $cart_item) {

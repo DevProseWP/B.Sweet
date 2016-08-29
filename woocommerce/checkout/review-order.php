@@ -28,6 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tr>
 	</thead>
 	<tbody>
+	<?php 
+	$named_basket =  WC()->session->get('named_basket');
+	if ($named_basket !== ""){
+		echo '<tr><td colspan="3">'.$named_basket.'</td></tr>';
+	}
+
+	?>
 		<?php
 			do_action( 'woocommerce_review_order_before_cart_contents' );
 

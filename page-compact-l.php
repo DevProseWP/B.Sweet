@@ -14,7 +14,6 @@ if (WC()->session->get('building_basket') == "true") {
 	}
 }
 
-
 ?>
 <?php get_header('compact'); ?>
 
@@ -84,6 +83,7 @@ if ($building_basket) { ?>
 	var max_size = <?php echo $maximum_size; ?>;
 	var maximum_items = <?php echo $maximum_items; ?>;
 	var minimum_items = <?php echo $minimum_items; ?>;
+	jQuery('.subcat-selector').prop("selectedIndex",0);
 </script>
 <?php } ?>
 <script type='text/javascript' src='<?php echo get_stylesheet_directory_uri(); ?>/quota.js'></script>

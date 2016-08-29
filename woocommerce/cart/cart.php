@@ -39,6 +39,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 		</tr>
 	</thead>
 	<tbody>
+		<?php 
+	$named_basket =  WC()->session->get('named_basket');
+	if ($named_basket !== ""){
+		echo '<tr><td colspan="6">'.$named_basket.'</td></tr>';
+	}
+
+	?>
 		<?php do_action( 'woocommerce_before_cart_contents' ); 
 		$items = WC()->cart->get_cart();
 		if(isset($items[key($items)]['composite_data'])) { $custom_basket = true; $basket_id = $items[key($items)]['composite_data'][key($items[key($items)]['composite_data'])]['product_id']; } else { $custom_basket = false; };
@@ -86,16 +93,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 							if ( ! $_product->is_visible() ) {
 								echo apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key ) . '&nbsp;';
 							} else {
-								if($_product->is_type("composite")) {
-									echo '<a href="/build/choose-your-products/">'.$_product->get_title().' <small>(click to edit)</small></a>';
-
-								 } elseif ($custom_basket) { 
-
-								 	echo $_product->get_title();
-
-								 } else {
+								if($_product->product_type == 'composite') { $more = "Composite";}
 								echo apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s">%s </a>', esc_url( $_product->get_permalink( $cart_item ) ), $_product->get_title() ), $cart_item, $cart_item_key );
-								}
+					
 							}
 					
 
@@ -115,7 +115,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
-					<td class="product-quantity" data-title="<?php _e( 'Quantity', 'woocommerce' ); ?>">
+					<td class="product-quantity" style="display: block !important" data-title="<?php _e( 'Quantity', 'woocommerce' ); ?>">
 						<?php
 							if ( $_product->is_sold_individually() ) {
 								$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );

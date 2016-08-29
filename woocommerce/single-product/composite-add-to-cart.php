@@ -30,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			echo apply_filters( 'woocommerce_stock_html', $availability_html, $availability[ 'availability' ], $product );
 		?></div>
+		<div class="name_basket"><input type="text" name="name_your_basket" value="" placeholder="Name Your Basket (Optional)"></div>
 		<div class="composite_button"><?php
 
 			/**

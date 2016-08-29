@@ -181,6 +181,14 @@
 .product_group {
   position: relative;
   min-height: 120px; }
+  .product_group h5 {
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 16px; }
 
 .product_group .products {
   transition: .5s; }
@@ -696,3 +704,26 @@
 
 .product-name {
   vertical-align: middle; }
+
+.name_basket {
+  width: 100%; }
+  .name_basket input {
+    max-width: 100%;
+    width: 100%;
+    background: #eee;
+    height: 55px; }
+
+.my_basket_wrap {
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 10px; }
+  .my_basket_wrap h6 {
+    width: 100%;
+    text-align: center;
+    padding: 0px !important;
+    margin: 0 !important;
+    font-size: 14px;
+    background: #eee;
+    padding: 10px !important;
+    padding: 10px 0px !important;
+    margin-bottom: 10px; }

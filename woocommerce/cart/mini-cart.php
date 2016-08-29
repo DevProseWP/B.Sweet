@@ -20,11 +20,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+$named_basket =  WC()->session->get('named_basket');
 ?>
 
 <?php do_action( 'woocommerce_before_mini_cart' ); ?>
+		<?php if ($named_basket !== ""){
+			echo "<div class='my_basket_wrap'><h6>Building: <em>" . $named_basket . "</em></h6></div>";
+		}
 
+		?>
 <ul class="cart_list product_list_widget <?php echo $args['list_class']; ?>">
 
 	<?php if ( ! WC()->cart->is_empty() ) : ?>
@@ -59,7 +63,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
 						<?php if ( ! $_product->is_visible() ) : ?>
 							<?php echo str_replace( array( 'http:', 'https:' ), '', $thumbnail ) . $product_name . '&nbsp;'; ?>
-						<?php else : ?>
+						<?php else :
+
+						?>
 							<a href="<?php echo esc_url( $_product->get_permalink( $cart_item ) ); ?>">
 								<?php echo str_replace( array( 'http:', 'https:' ), '', $thumbnail ) . $product_name . '&nbsp;'; ?>
 							</a>

@@ -40,7 +40,8 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
 	<?php if ( sizeof( $checkout->checkout_fields ) > 0 ) : ?>
-
+	<h3 id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
+<?php wc_get_template( 'checkout/review-order.php', array( 'checkout' => WC()->checkout() ) ); ?>
 		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
 		<h2 style="text-align:center;">If you are a new customer then start here!</h2>
@@ -59,12 +60,12 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 
 	<?php endif; ?>
 
-	<h3 id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
+	
 
 	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
 	<div id="order_review" class="woocommerce-checkout-review-order">
-		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+		<?php woocommerce_checkout_payment(); ?>
 	</div>
 
 	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
