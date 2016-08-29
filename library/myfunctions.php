@@ -18,8 +18,20 @@ return $woo;
 
 function woocommerce_template_loop_product_thumbnail() {
 
+	  global $product;
+      $attachment_ids = $product->get_gallery_attachment_ids();
+      if(sizeof($attachment_ids) > 0) {
+      	$output = "<div class='flip-container'><div class='lower-image'>";
 
-	echo woocommerce_get_product_thumbnail();
+      	$html = wp_get_attachment_image($attachment_ids[0], "shop_catalog", false);
+
+		$output .= apply_filters( 'post_thumbnail_html',$html,$product->ID, $attachment_ids[0], "shop_catalog");
+
+      	$output .= "</div><div class='upper-image'>" . woocommerce_get_product_thumbnail() . "</div></div>";
+      	echo $output;
+      } else {
+		echo woocommerce_get_product_thumbnail();
+	  }
 
 }
 

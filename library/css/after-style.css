@@ -727,3 +727,23 @@
     padding: 10px !important;
     padding: 10px 0px !important;
     margin-bottom: 10px; }
+
+.flip-container {
+  position: relative; }
+
+.lower-image {
+  display: block;
+  opacity: 0;
+  transition: .2s; }
+
+.upper-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: .2s; }
+
+.flip-container:hover .lower-image {
+  opacity: 1; }
+
+.flip-container:hover .upper-image {
+  opacity: 0; }
