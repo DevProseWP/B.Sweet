@@ -46,8 +46,12 @@
 		 	(strpos($url, "/build" ) == false) &&
 		 	(strpos($url, "/checkout" ) == false) && 
 		 	(strpos($url, "/cart" ) == false)
-		 	)) { ?>
-			<div id="build-reminder"><a href="/build/choose-your-products/"><?php echo get_field('notification_basket_in_progress','option'); ?></a></div>
+		 	)) { ?><div id="message-box"><p></p></div>
+			<script>
+				        jQuery('#message-box p').html("<?php echo get_field('notification_basket_in_progress','option'); ?>");
+        jQuery('#message-box').fadeIn('fast').delay(6000).fadeOut('fast')
+
+		</script>
 		<?php } ?>
 
 	</body>

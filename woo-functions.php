@@ -24,7 +24,9 @@ function wcAfterAdd($product){
 }
 
 add_action('woocommerce_cart_emptied', 'wcRemove');
+add_action('woocommerce_thankyou', 'wcRemove');
 function wcRemove(){
 	WC()->session->set( 'building_basket' , "false" );
 	WC()->session->set( 'custom_basket', "");
+	WC()->session->set( 'name_custom_basket', "");
 }

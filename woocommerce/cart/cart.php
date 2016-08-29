@@ -44,7 +44,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 	if ($named_basket !== ""){
 		echo '<tr><td colspan="6">'.$named_basket.'</td></tr>';
 	}
-
 	?>
 		<?php do_action( 'woocommerce_before_cart_contents' ); 
 		$items = WC()->cart->get_cart();

@@ -2,12 +2,10 @@ jQuery(function($) {
     minmax = notification_choose_between.replace('{-#}', minimum_items);
     minmax = minmax.replace('{+#}', maximum_items);
     $('#minmax').html(minmax);
-    function fireError(error){
+     function fireError(error){
         $('#message-box p').html(error);
-        $('#message-box').fadeIn('fast', function() {
-
-        });
-    }
+        $('#message-box').fadeIn('fast').delay(6000).fadeOut('fast')
+     }
     function updateProgress(items) {
 
         if (items == null) {
@@ -28,8 +26,7 @@ jQuery(function($) {
                 }
         
         } else {
-            console.log(items);
-            console.log((items) / maximum_items);
+     
             var percent = (Math.floor(((items) / maximum_items)*100));
             if (percent == 100) {
                      $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
@@ -60,12 +57,12 @@ jQuery(function($) {
 
     $(document).on('click', '.single-ajax-add', function(event) {
         event.preventDefault();
-        console.log(curr_quantity+" "+maximum_items);
+
         if ((curr_quantity + products_size) > maximum_items) {
             fireError(notification_no_room);
             event.stopImmediatePropagation();
         } else if ((curr_quantity) == maximum_items) {
-            console.log(curr_quantity+" "+maximum_items);
+        
             fireError(notification_basket_full);
             event.stopImmediatePropagation();
         }  else if (products_size > max_size) {
@@ -83,6 +80,7 @@ jQuery(function($) {
         $('#message-box').fadeOut('fast');
     });
     $(document).on('click', '.ajax-flag-quota', function(event) {
+
         counts = getCartCount();
         var items_in_cart = counts['items'];
         var current_volume = counts['volume'];
@@ -94,18 +92,23 @@ jQuery(function($) {
             event.stopImmediatePropagation();
             window.location = $(this).attr('href');
         }
-
-        if (((items_in_cart + item_size) > maximum_items) && (items_in_cart < maximum_items)) {
+        console.log(items_in_cart + " " + item_size + " " + maximum_items)
+        if (((items_in_cart + item_size) > maximum_items)) {
+            console.log('GOTEM!');
             fireError(notification_no_room);
             event.stopImmediatePropagation();
+            return false;
         } else if ((items_in_cart) == maximum_items) {
            $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
 
             event.stopImmediatePropagation();
+            return false;
         }  else if (item_size > max_size) {
            fireError(notification_too_big);
             event.stopImmediatePropagation();
+            return false;
         }    else {
+
             items_in_cart = items_in_cart + item_size;
     
             updateProgress(items_in_cart);
