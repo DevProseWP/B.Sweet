@@ -29,12 +29,12 @@ $this_volume = (get_field('product_volume')) ? get_field('product_volume') : 1;
 $this_size = (get_field('product_size')) ? get_field('product_size') : 1;
 	if ( empty( $woocommerce_loop['loop'] ) ) {
 		$woocommerce_loop['loop'] = 0;
-		$woocommerce_loop['looked'] = 0;
+
 	}
 
 if (!$building_basket || ($building_basket && ($basket_max_prod_size >= $this_size))) {
 // Store loop count we're currently on
-
+$woocommerce_loop['displayed']++;
 // Store column count for displaying the grid
 	if ( empty( $woocommerce_loop['columns'] ) ) {
 		$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );

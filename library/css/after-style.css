@@ -179,7 +179,8 @@
     padding: 4px 10px; }
 
 .product_group {
-  position: relative; }
+  position: relative;
+  min-height: 120px; }
 
 .product_group .products {
   transition: .5s; }
@@ -190,6 +191,7 @@
 .working {
   background: rgba(255, 255, 255, 0.5);
   width: 100%;
+  min-height: 320px;
   padding: 150px 0px 150px 0px;
   position: absolute;
   top: 0;

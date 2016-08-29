@@ -67,6 +67,8 @@ function productGroup($atts) {
 	$woocommerce_loop['product_group'] = TRUE;
 	$woocommerce_loop['echo'] = $a['echo'];
 	$woocommerce_loop['maxsize'] = $a['maxsize'];
+	$woocommerce_loop['counter'] = 0;
+	$woocommerce_loop['displayed'] = 0;
 
 	ob_start();
 	if ( $products->have_posts() ) : ?>
@@ -78,6 +80,7 @@ function productGroup($atts) {
 		<?php woocommerce_product_loop_end(); ?>
 		<?php do_action( "woocommerce_shortcode_after_product_cat_loop" ); ?>
 	<?php endif;
+
 	woocommerce_reset_loop();
 	wp_reset_postdata();
 	WC()->query->remove_ordering_args();
@@ -98,8 +101,8 @@ function productGroup($atts) {
 		
 	} else {
 
-		if(($woocommerce_loop['loop'] == 0) &&($woocommerce_loop['looked'] > 0)) {
-			return'<h3>Nothing found</h3>';
+		if($woocommerce_loop['displayed'] < 1) {
+			return'<h3>Nothing found</h3>' . $loop['loop'];
 		} else {
 	
 		 return ob_get_clean();

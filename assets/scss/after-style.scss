@@ -191,7 +191,8 @@ background-position: 97.5% center;
 }
 
 .product_group {
-  position: relative
+  position: relative;
+  min-height: 120px;
 }
 
 .product_group .products {
@@ -200,10 +201,9 @@ transition: .5s;
 
 .ajax-container { position: relative;}
 .working {
-background: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.5);
   width: 100%;
-  
-
+  min-height: 320px;
   padding: 150px 0px 150px 0px;
   position: absolute;
   top: 0; 
