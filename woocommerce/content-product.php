@@ -21,34 +21,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product, $woocommerce_loop, $basket_max_prod_size, $building_basket;
-
+if(isset($woocommerce_loop['maxsize'])) {
+	$basket_max_prod_size = $woocommerce_loop['maxsize'];
+	$building_basket = true;
+} 
 $this_volume = (get_field('product_volume')) ? get_field('product_volume') : 1; 
 $this_size = (get_field('product_size')) ? get_field('product_size') : 1;
+	if ( empty( $woocommerce_loop['loop'] ) ) {
+		$woocommerce_loop['loop'] = 0;
+		$woocommerce_loop['looked'] = 0;
+	}
 
-if (!$building_basket || ($building_basket &&($basket_max_prod_size >= $this_size))) {
+if (!$building_basket || ($building_basket && ($basket_max_prod_size >= $this_size))) {
 // Store loop count we're currently on
-if ( empty( $woocommerce_loop['loop'] ) ) {
-	$woocommerce_loop['loop'] = 0;
-}
 
 // Store column count for displaying the grid
-if ( empty( $woocommerce_loop['columns'] ) ) {
-	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
-}
+	if ( empty( $woocommerce_loop['columns'] ) ) {
+		$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
+	}
 
 // Ensure visibility
-if ( ! $product || ! $product->is_visible() ) {
-	return;
-}
+	if ( ! $product || ! $product->is_visible() ) {
+		return;
+	}
 
-// Increase loop count
-$woocommerce_loop['loop']++;
+	// Increase loop count
+	$woocommerce_loop['loop']++;
 
 // Extra post classes
 $classes = array();
-if ( 0 === ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 === $woocommerce_loop['columns'] ) {
-	$classes[] = 'first product ';
-}
+	if ( 0 === ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 === $woocommerce_loop['columns'] ) {
+		$classes[] = 'first product ';
+	}
 if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	$classes[] = 'last product ';
 }
@@ -114,4 +118,7 @@ if (!in_array("product", $classes)) $classes[]='product';
 	</a>
 </li>
 
-<?php } ?>
+<?php } 
+$woocommerce_loop['looked']++;
+
+?>

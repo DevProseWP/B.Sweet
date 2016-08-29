@@ -19,7 +19,8 @@ function productGroup($atts) {
 			'include_children' => FALSE,
 			'echo'	   => FALSE,
 			'category' => '',  // Slugs
-			'operator' => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
+			'operator' => 'IN', // Possible values are 'IN', 'NOT IN', 'AND'.
+			'maxsize' => 1
     ), $atts );
 
 /* build filter selector */
@@ -65,6 +66,8 @@ function productGroup($atts) {
 	$woocommerce_loop['columns'] = $columns;
 	$woocommerce_loop['product_group'] = TRUE;
 	$woocommerce_loop['echo'] = $a['echo'];
+	$woocommerce_loop['maxsize'] = $a['maxsize'];
+
 	ob_start();
 	if ( $products->have_posts() ) : ?>
 		<?php do_action( "woocommerce_shortcode_before_product_cat_loop" ); ?>
@@ -80,6 +83,7 @@ function productGroup($atts) {
 	WC()->query->remove_ordering_args();
 	if(!$a['echo']) {
 		return '<div class="woocommerce ajax-container group-'.$cur_term->term_id.' columns-' . $columns . '">' . $child_selector . '<div class="working">
+	
 		<div class="cssload-loader">
 			<div class="cssload-side"></div>
 			<div class="cssload-side"></div>
@@ -89,10 +93,17 @@ function productGroup($atts) {
 			<div class="cssload-side"></div>
 			<div class="cssload-side"></div>
 			<div class="cssload-side"></div>
-		</div>
-		</div><div class="product_group" id="group-'.$cur_term->term_id.'">' . ob_get_clean() . '</div></div>';
+		</div></div><div class="product_group" id="group-'.$cur_term->term_id.'">' . ob_get_clean() . '</div></div>';
+
+		
 	} else {
-		return ob_get_clean();
+
+		if(($woocommerce_loop['loop'] == 0) &&($woocommerce_loop['looked'] > 0)) {
+			return'<h3>Nothing found</h3>';
+		} else {
+	
+		 return ob_get_clean();
+		}
 	}
 }
 
@@ -121,6 +132,7 @@ add_action( 'wp_ajax_nopriv_update_sub_cat', 'my_action_callback' );
 function update_sub_cat() {
 	$subcat = $_REQUEST['showcat'];
 	$target = $_REQUEST['target'];
+	$maxsize = $_REQUEST['max-size'];
 	if ($subcat == -1){
 		$term = get_term($target, 'product_cat');
 		$replace = productGroup([
@@ -128,7 +140,8 @@ function update_sub_cat() {
 			'columns' => 3,
 			'order' => 'asc',
 			'per_page' => 50,
-			'echo' => true
+			'echo' => true,
+			'maxsize' => $maxsize
 		]);
 
 	} else {
@@ -138,7 +151,8 @@ function update_sub_cat() {
 			'columns' => 3,
 			'order' => 'asc',
 			'per_page' => 50,
-			'echo' => true
+			'echo' => true,
+			'maxsize' => $maxsize
 		]);
 	}
 

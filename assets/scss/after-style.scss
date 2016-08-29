@@ -262,11 +262,9 @@ text-align: center;
   font-weight: bold;
 }
 
-
 .cssload-loader {
   position: absolute;
   left: 50%;
-
   width: 47.284271247462px;
   height: 47.284271247462px;
   margin-left: -23.142135623731px;
@@ -297,7 +295,7 @@ text-align: center;
   display: block;
   width: 6px;
   height: 19px;
-  background-color: rgb(4,99,128);
+  background-color: rgb(117,117,117);
   margin: 2px;
   position: absolute;
   border-radius: 50%;
@@ -457,6 +455,15 @@ text-align: center;
     -webkit-animation-delay: 0;
     -moz-animation-delay: 0;
 }
+
+
+
+
+
+
+
+
+
 
 @keyframes cssload-rotate0 {
   0% {
@@ -797,7 +804,6 @@ text-align: center;
             transform: rotate(360deg);
   }
 }
-
 #build-reminder {
   background: #2980B9;
   width: 100%;
@@ -810,4 +816,12 @@ text-align: center;
     width: 100%;
     height: 100%;
   }
+}
+
+.checkout-thumb {
+  width: 60px; height: 60px; float: left;
+}
+
+.product-name {
+  vertical-align: middle;
 }

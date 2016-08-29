@@ -151,7 +151,8 @@ jQuery(function($) {
     var request = {
         'action': 'update_sub_cat',
         'showcat': $(this).val(),
-        'target': target
+        'target': target,
+        'max-size': max_size
     };
      $('.group-'+target+' .working').css('display', 'block');
      $('#group-'+target+' ul').css('opacity', '0');
