@@ -45,12 +45,16 @@
 		 if ((WC()->session->get('building_basket') == "true")  && (  
 		 	(strpos($url, "/build" ) == false) &&
 		 	(strpos($url, "/checkout" ) == false) && 
-		 	(strpos($url, "/cart" ) == false)
-		 	)) { ?><div id="message-box"><p></p></div>
+		 	(strpos($url, "/cart" ) == false) &&
+		 	(strpos($url, "/product" ) == false) 
+		 	
+		 	)) { ?><div id="message-box"><a href="/build/choose-your-products"><p></p></a><div id="close-message"><i class="fa fa-times-circle-o" aria-hidden="true"></i></div>
 			<script>
 				        jQuery('#message-box p').html("<?php echo get_field('notification_basket_in_progress','option'); ?>");
-        jQuery('#message-box').fadeIn('fast').delay(6000).fadeOut('fast')
-
+        jQuery('#message-box').fadeIn('fast');
+           jQuery(document).on('click', '#close-message', function(event) {
+       jQuery('#message-box').fadeOut('fast');
+    });
 		</script>
 		<?php } ?>
 

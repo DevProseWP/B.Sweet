@@ -20,15 +20,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
-
+if($product->product_type !== 'bundle') $associate = "custom_basket";
 
 echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-product_title="%s" class="ajax-flag-quota %s">%s</a>',
+	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-product_title="%s" data-associate="%s" class="ajax-flag-quota %s">%s</a>',
 		esc_url( $product->add_to_cart_url() ),
 		esc_attr( isset( $quantity ) ? $quantity : 100 ),
 		esc_attr( $product->id ),
 		esc_attr( $product->get_sku() ),
 		esc_attr( get_the_title($product->id)),
+		esc_attr( $associate ),
 		esc_attr( isset( $class ) ? $class : 'button' ),
 		esc_html( $product->add_to_cart_text() )
 	),

@@ -16,7 +16,8 @@
 		if($items) {
 
 			    foreach($items as $item => $values) { 
-			       	if (!in_array($values['data']->id, $excludes)) {     	
+			       	if (!in_array($values['data']->id, $excludes)) {  
+			       		if(($values['data']->product_type == 'bundle')|| ($values['data']->virtual == "yes")) continue;    	
 			       		$prodsize = (get_field('product_size', $values['data']->id)) ? get_field('product_size', $values['data']->id) : 1 ; 
 			       		$current_quantity = $current_quantity + ($values['quantity'] * $prodsize);
 			       	}

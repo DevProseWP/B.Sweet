@@ -41,20 +41,38 @@ jQuery(function($) {
 
         var counts = new Object();
         counts['volume'] = 0;
-        counts['items'] = 0; 
-        $('.cart_list li').each(function(index, el) {
-            if (index > 0 && $(this).data('volume')) {
-                counts['volume'] = counts['volume'] +
-                    parseInt($(this).data('volume'));
-            }
-            if (index > 0){
-                counts['items'] = counts['items'] + (parseInt($(this).find('.quantity').html()) * $(this).data('size'))   ;
-            }
-        });
+        counts['items'] = curr_quantity; 
+        // $('.cart_list li').each(function(index, el) {
+        //     if (index > 0 && $(this).data('volume')) {
+        //         counts['volume'] = counts['volume'] +
+        //             parseInt($(this).data('volume'));
+        //     }
+        //     if (index > 0){
+        //         counts['items'] = counts['items'] + (parseInt($(this).find('.quantity').html()) * $(this).data('size'))   ;
+        //     }
+        // });
+        console.log(counts);
         return counts;
 
     }
+    $(document).on('click', '.remove', function(event) {
+        $this = $(this);
+         $this.parent('li').css('opacity', '0');
+        event.preventDefault();
+        request = {
+            'action':'remove_product',
+            'key': $(this).data('key')
+        };
+       $.post('/wp-admin/admin-ajax.php ', request, function(data) {
+           console.log( $this.parent('li'));
+           curr_quantity = curr_quantity - $this.data('quantity');
+           $this.parent('li').fadeOut('fast');
+              updateProgress();
+        });
 
+ 
+
+    });
     $(document).on('click', '.single-ajax-add', function(event) {
         event.preventDefault();
 
@@ -80,25 +98,24 @@ jQuery(function($) {
         $('#message-box').fadeOut('fast');
     });
     $(document).on('click', '.ajax-flag-quota', function(event) {
-
         counts = getCartCount();
-        var items_in_cart = counts['items'];
+
         var current_volume = counts['volume'];
         event.preventDefault();
         item_size = $(this).parent('li').data('size');
 
 
-        if (($(this).hasClass('product_type_variable'))&& (items_in_cart < maximum_items)){
+        if (($(this).hasClass('product_type_variable'))&& (curr_quantity < maximum_items)){
             event.stopImmediatePropagation();
             window.location = $(this).attr('href');
         }
-        console.log(items_in_cart + " " + item_size + " " + maximum_items)
-        if (((items_in_cart + item_size) > maximum_items)) {
+        console.log(curr_quantity + " " + item_size + " " + maximum_items)
+        if (((curr_quantity + item_size) > maximum_items)) {
             console.log('GOTEM!');
             fireError(notification_no_room);
             event.stopImmediatePropagation();
             return false;
-        } else if ((items_in_cart) == maximum_items) {
+        } else if ((curr_quantity) == maximum_items) {
            $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
 
             event.stopImmediatePropagation();
@@ -109,9 +126,9 @@ jQuery(function($) {
             return false;
         }    else {
 
-            items_in_cart = items_in_cart + item_size;
+            curr_quantity = curr_quantity + item_size;
     
-            updateProgress(items_in_cart);
+            updateProgress();
             return true;
         }
         return false;

@@ -456,12 +456,25 @@ add_filter( 'woocommerce_add_cart_item_data', 'wdm_empty_cart', 10, 3);
 function wdm_empty_cart( $cart_item_data, $product_id, $variation_id )
 {
   global $woocommerce;
+
     $this_product = get_product($product_id);
       if ($this_product->is_type('composite')){
-        $woocommerce->cart->empty_cart();
+         $cart = WC()->cart->get_cart();
+         foreach ($cart  as $cart_item_key => $cart_item) {
+          $type = $cart_item['data']->product_type;
+          $virtual = $cart_item['data']->virtual;
+          if(($type == 'composite')||(($virtual == "no") && ($type !== 'bundle'))){
+            WC()->cart->remove_cart_item($cart_item_key);
+          }
+         }
       }
+
   return $cart_item_data;
   }
+
+
+
+
 // Cart message for choosing basket (jumbo) in byob
 
 add_filter( 'wc_add_to_cart_message', 'byob_custom_add_to_cart_message_jum', 10, 2 );
@@ -479,15 +492,12 @@ return $message;
   // Succesfully added byob product item, return
 
   add_filter( 'wc_add_to_cart_message', 'byob_product_added_return_custom', 10, 2 );
-
-
-
   function byob_product_added_return_custom( $message, $product_id ) {
   global $woocommerce;
 
     if( has_term( 'all-product-categories', 'product_cat', $product_id ) ){
     $return_to  = "/build/choose-your-products/";
-    $message    = sprintf('<a href="%s" class="button wc-forwards">%s</a> %s', $return_to, __('<i class="fa fa-arrow-left" style="margin-right:5px;"></i>Return to all items ', 'woocommerce'), __('This item was successfully added', 'woocommerce') );
+    $message    = sprintf('%s', __('This item was successfully added', 'woocommerce') );
   }
   return $message;
   }
@@ -596,8 +606,9 @@ function getProductsInComposite($items) {
       $current_quantity = 0;
         foreach($items as $item => $values) {
             if (!in_array($values['data']->id, $excludes)) {
-                    $prodsize = (get_field('product_size', $basket_id)) ? get_field('product_size', $values['data']->id) : 1 ;
-            $current_quantity = $current_quantity + ($values['quantity'] * $prodsize);
+              if(($values['data']->product_type == 'bundle')|| ($values['data']->virtual == "yes")) continue; 
+               $prodsize = (get_field('product_size', $basket_id)) ? get_field('product_size', $values['data']->id) : 1 ;
+               $current_quantity = $current_quantity + ($values['quantity'] * $prodsize);
             }
         }
     }

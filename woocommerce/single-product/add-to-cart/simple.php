@@ -55,6 +55,24 @@ if ( ! $product->is_purchasable() ) {
 	 	<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
 
 	 	<button type="submit" class="single-ajax-add single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+<?php /*
+	 	global $product;
+if($product->product_type !== 'bundle') $associate = "custom_basket";
+
+echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+	sprintf( '<a id="ajax-add" rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-product_title="%s" data-associate="%s" class="button product_type_simple add_to_cart_button ajax_add_to_cart %s">%s</a>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( isset( $quantity ) ? $quantity : 100 ),
+		esc_attr( $product->id ),
+		esc_attr( $product->get_sku() ),
+		esc_attr( get_the_title($product->id)),
+		esc_attr( $associate ),
+		esc_attr( isset( $class ) ? $class : 'button' ),
+		esc_html( $product->add_to_cart_text() )
+	),
+$product );
+*/
+?>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>

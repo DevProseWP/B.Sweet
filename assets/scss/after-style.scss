@@ -877,3 +877,11 @@ margin-bottom: 10px;
 
 .flip-container:hover .lower-image { opacity: 1; }
 .flip-container:hover .upper-image { opacity: 0; }
+
+#message-box a { text-decoration: none; color: #fff; }
+
+.mini_cart_item {
+  display: block;
+  transition: .5s;
+}
+

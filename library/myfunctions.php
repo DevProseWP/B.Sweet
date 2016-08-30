@@ -155,8 +155,17 @@ function maybe_add_category_args( $args, $category, $operator, $include_children
 	}
 
 
+add_action( 'wp_ajax_remove_product', 'remove_product' );
+add_action( 'wp_ajax_nopriv_remove_product', 'remove_product' );
+function remove_product(){
+	$key = $_REQUEST['key'];
+	WC()->cart->remove_cart_item($key);
+	
+	die();
+}
+
 add_action( 'wp_ajax_update_sub_cat', 'update_sub_cat' );
-add_action( 'wp_ajax_nopriv_update_sub_cat', 'my_action_callback' );
+add_action( 'wp_ajax_nopriv_update_sub_cat', 'update_sub_cat' );
 
 function update_sub_cat() {
 	$subcat = $_REQUEST['showcat'];
