@@ -151,4 +151,13 @@ $(".sticky").stick_in_parent({recalc_every: 1});
 
 // $( 'img' ).attr( 'rel', 'lightbox' );
 
+$(".description-trigger").click(function(event) {
+
+$(this).children('.bundle-collapsed-product').slideToggle("400");
+
+});
+
+
 }); /* end of as page load scripts */
+
+

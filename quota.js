@@ -7,16 +7,18 @@ jQuery(function($) {
         $('#message-box').fadeIn('fast').delay(6000).fadeOut('fast')
      }
     function updateProgress(items) {
-
+        
         if (items == null) {
-           
+
                 items = curr_quantity;
                 var percent = (Math.floor(((items) / maximum_items)*100));
+                $('#progress-bar').html('<div class="progress-bar-inner"><div class="progress-indicator"></div><div class="progress-bar-advancer"></div></div>');
                 if (percent) {
                     if (percent == 100) {
                       $('.progress-bar-advancer').css('width', percent+'%');
                       $('#progress-bar').html('<a href="/checkout/" class="prog-button button checkout wc-forward"><div class="cell">'+notification_progress_checkout+'</div></a>');
                     } else {
+
                       $('.progress-bar-advancer').css('width', percent+'%');
                       $('.progress-indicator').html(notification_progress_text.replace('{#}',(maximum_items - items))).css('color', 'white');
                     }
@@ -38,10 +40,20 @@ jQuery(function($) {
   
     }
     function getCartCount(){
-
-        var counts = new Object();
+           var counts = new Object();
         counts['volume'] = 0;
-        counts['items'] = curr_quantity; 
+       
+       $.ajax({
+            url: '/wp-admin/admin-ajax.php',
+            data: {'action':'get_cart_count'},
+            async: false, 
+            success: function(data) {
+                 counts['items'] = data; 
+            }
+        });
+        
+
+     
         // $('.cart_list li').each(function(index, el) {
         //     if (index > 0 && $(this).data('volume')) {
         //         counts['volume'] = counts['volume'] +
@@ -51,13 +63,13 @@ jQuery(function($) {
         //         counts['items'] = counts['items'] + (parseInt($(this).find('.quantity').html()) * $(this).data('size'))   ;
         //     }
         // });
-        console.log(counts);
+  
         return counts;
 
     }
     $(document).on('click', '.remove', function(event) {
         $this = $(this);
-         $this.parent('li').css('opacity', '0');
+        $this.parent('li').css('opacity', '0');
         event.preventDefault();
         request = {
             'action':'remove_product',
@@ -77,10 +89,10 @@ jQuery(function($) {
         event.preventDefault();
 
         if ((curr_quantity + products_size) > maximum_items) {
+            console.log(parseInt(curr_quantity + products_size));
             fireError(notification_no_room);
             event.stopImmediatePropagation();
         } else if ((curr_quantity) == maximum_items) {
-        
             fireError(notification_basket_full);
             event.stopImmediatePropagation();
         }  else if (products_size > max_size) {
@@ -96,7 +108,12 @@ jQuery(function($) {
 
     $(document).on('click', '#close-message', function(event) {
         $('#message-box').fadeOut('fast');
+        console.log($(this).data('box'));
+        if($(this).data('box') == 'building-reminder'){
+  
+        }
     });
+
     $(document).on('click', '.ajax-flag-quota', function(event) {
         counts = getCartCount();
 
@@ -163,6 +180,7 @@ jQuery(function($) {
 
    $(document).ready(function() {
         updateProgress(); 
+         updateProgress();
    });
 
    $(document).on('change', '.subcat-selector', function(event) {

@@ -7,9 +7,6 @@
 
 						<div class="featured-image-fallback">
 							<div id="featured-image">
-								<div id="logo">
-									<h1><a href="<?php echo home_url(); ?>" rel="nofollow"><?php bloginfo('name'); ?></a></h1>
-								</div>
 							</div>
 						</div>
 
@@ -31,7 +28,7 @@
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
-								<section class="entry-content cf bg-container" itemprop="articleBody">
+								<section class="entry-content cf" itemprop="articleBody">
 									<?php
 										// the content (pretty self explanatory huh)
 										the_content();

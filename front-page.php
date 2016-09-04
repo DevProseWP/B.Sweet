@@ -38,4 +38,10 @@
 			</div>
 
 </div>
+
+<div class="instagram_feed`">
+	<?php
+echo do_shortcode('[instagram-feed]');
+?>
+</div>
 <?php get_footer(); ?>

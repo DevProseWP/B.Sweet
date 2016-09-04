@@ -24,8 +24,8 @@ global $product, $woocommerce_loop, $basket_max_prod_size, $building_basket;
 if(isset($woocommerce_loop['maxsize'])) {
 	$basket_max_prod_size = $woocommerce_loop['maxsize'];
 	$building_basket = true;
-} 
-$this_volume = (get_field('product_volume')) ? get_field('product_volume') : 1; 
+}
+$this_volume = (get_field('product_volume')) ? get_field('product_volume') : 1;
 $this_size = (get_field('product_size')) ? get_field('product_size') : 1;
 	if ( empty( $woocommerce_loop['loop'] ) ) {
 		$woocommerce_loop['loop'] = 0;
@@ -109,7 +109,7 @@ if (!in_array("product", $classes)) $classes[]='product';
 	 * @hooked woocommerce_template_loop_add_to_cart - 10
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
-	
+
 	?>
 	<a href="<?php echo get_permalink();?>" class="details_link">
 		<p class="details_btn">
@@ -118,7 +118,7 @@ if (!in_array("product", $classes)) $classes[]='product';
 	</a>
 </li>
 
-<?php } 
+<?php }
 $woocommerce_loop['looked']++;
 
 ?>

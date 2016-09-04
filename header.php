@@ -27,10 +27,6 @@
 		<!--[if IE]>
 			<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
 		<![endif]-->
-		<?php // or, set /favicon.ico for IE10 win ?>
-		<meta name="msapplication-TileColor" content="#f01d4f">
-		<meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/library/images/win8-tile-icon.png">
-            <meta name="theme-color" content="#121212">
 
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
@@ -42,7 +38,6 @@
 		<?php // end analytics ?>
 
 	</head>
-<div class="beta-banner"><code>this website is in beta testing. Please report any bugs <a href="mailto:aidanjporter@gmail.com?subject=BSweet bug report&body=Please explain the problem, if possible attach a screenshot of it. %0D%0AThank you">HERE</a></code></div>
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
 
 		<div id="container">
@@ -70,6 +65,7 @@
 							<h1 class="visuallyhidden"><?php bloginfo('name'); ?></h1>
 							<a href="<?php echo home_url(); ?>" rel="nofollow"><img src="/wp-content/themes/B.Sweet/library/images/logo/new-logo/logo.png  " alt="B.Sweet logo" /></a>
 						</div>
+						<h3 class="site_tagline"><?php bloginfo('description'); ?></h3>
 
 						<nav role="navigation" class="main-nav-wrap" itemscope itemtype="http://schema.org/SiteNavigationElement">
 							<?php wp_nav_menu(array(

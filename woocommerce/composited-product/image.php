@@ -26,9 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'title' => $image_title
 		) );
 
-		echo apply_filters( 'woocommerce_composited_product_image_html', sprintf( '<a href="%s" class="composited_product_image zoom" title="%s" rel="lightbox">%s</a>', $image_link, $image_title, $image ), $product_id );
+		echo apply_filters( 'woocommerce_composited_product_image_html', sprintf( '<a href="%s" class="composited_product_image zoom" title="%s">%s</a>', $image_link, $image_title, $image ), $product_id );
 	} else {
-		echo apply_filters( 'woocommerce_composited_product_image_html', sprintf( '<a href="%1$s" class="composited_product_image zoom" title="%2$s" rel="lightbox"><img src="%1$s" alt="%2$s" /></a>', wc_placeholder_img_src(), __( 'Placeholder', 'woocommerce' ) ), $product_id );
+		echo apply_filters( 'woocommerce_composited_product_image_html', sprintf( '<a href="%1$s" class="composited_product_image zoom" title="%2$s"><img src="%1$s" alt="%2$s" /></a>', wc_placeholder_img_src(), __( 'Placeholder', 'woocommerce' ) ), $product_id );
 	}
 
 ?></div>

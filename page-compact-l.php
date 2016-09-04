@@ -4,6 +4,9 @@
 */
 
 if (WC()->session->get('building_basket') == "true") {
+	header("Cache-Control: no-store, must-revalidate, max-age=0");
+	header("Pragma: no-cache");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	include('composite-data.php');
 } else {
 	$building_basket = false;
@@ -19,7 +22,7 @@ if (WC()->session->get('building_basket') == "true") {
 
 <script type="text/javascript">
 var	product_volume = <?php echo (get_field('product_volume', $basket_id)) ? get_field('product_volume', $basket_id) : 1; ?>;
-var	product_size  = <?php echo (get_field('product_size', $basket_id)) ? get_field('product_size', $basket_id) : 1; ?>;	
+var	product_size  = <?php echo (get_field('product_size', $basket_id)) ? get_field('product_size', $basket_id) : 1; ?>;
 var	minimum_items 	 = <?php echo $minimum_items; ?>;
 var	maximum_items = <?php echo $maximum_items; ?>;
 </script>
@@ -74,6 +77,7 @@ var	maximum_items = <?php echo $maximum_items; ?>;
 
 			</div>
 			<?php
+
 if ($building_basket) { ?>
 
 <script>
@@ -87,4 +91,5 @@ if ($building_basket) { ?>
 </script>
 <?php } ?>
 <script type='text/javascript' src='<?php echo get_stylesheet_directory_uri(); ?>/quota.js'></script>
-<?php get_footer(); ?>
+
+<?php get_footer('compact'); ?>

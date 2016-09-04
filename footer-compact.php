@@ -1,7 +1,7 @@
 
 
 
-			<footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+			<footer class="footer compact-footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 
 				<div class="supplier_logos">
 					<h4>Featuring products from</h4>
@@ -45,6 +45,7 @@
 		<?php wp_footer();
 		include('build-reminder.php');
 		?>
+
 	</body>
 
 </html> <!-- end of site. what a ride! -->

@@ -863,15 +863,17 @@ margin-bottom: 10px;
 }
 
 .lower-image {
+   position: absolute;
+     top: 0;
+  left: 0;
   display: block;
   opacity: 0;
   transition: .2s
 }
 
 .upper-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+ 
+  position: relative;
    transition: .2s
 }
 
@@ -884,4 +886,27 @@ margin-bottom: 10px;
   display: block;
   transition: .5s;
 }
+.bundled_product .details { width: 100%; }
+.description-wrapper {
+  width: 100%;
+}
+.trigger-text {
+  width: 100%;
+  cursor: pointer;
+  background: #eee;
+  i { float: right; padding-top: 5px}
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 2px;
+  &:hover {
+    background: #ccc;
+  }
 
+}
+
+
+.bundle-collapsed-product {
+padding-top: 10px;
+display: none;
+overflow: hidden;
+}

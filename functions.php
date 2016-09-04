@@ -9,7 +9,7 @@ sidebars, comments, etc.
 */
 
 // LOAD BONES CORE (if you remove this, the theme will break)
-// 
+//
 
 define('WP_BBDEBUG',true);
 
@@ -606,7 +606,7 @@ function getProductsInComposite($items) {
       $current_quantity = 0;
         foreach($items as $item => $values) {
             if (!in_array($values['data']->id, $excludes)) {
-              if(($values['data']->product_type == 'bundle')|| ($values['data']->virtual == "yes")) continue; 
+              if(($values['data']->product_type == 'bundle')|| ($values['data']->virtual == "yes")) continue;
                $prodsize = (get_field('product_size', $basket_id)) ? get_field('product_size', $values['data']->id) : 1 ;
                $current_quantity = $current_quantity + ($values['quantity'] * $prodsize);
             }
@@ -752,6 +752,7 @@ function my_woocommerce_catalog_orderby( $orderby ) {
 add_filter( "woocommerce_catalog_orderby", "my_woocommerce_catalog_orderby", 20 );
 
 require_once( 'woo-functions.php' );
+
 
 
 

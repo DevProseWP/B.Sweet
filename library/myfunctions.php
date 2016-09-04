@@ -14,6 +14,14 @@ return $woo;
 
 
 
+
+add_action( 'wp_ajax_clear_reminder', 'clear_reminder' );
+add_action( 'wp_ajax_nopriv_clear_reminder', 'clear_reminder' );
+function clear_reminder(){
+	WC()->session->set('show_reminder',"no");
+	die();
+}
+
 /** custom shortcode for products page */
 
 function woocommerce_template_loop_product_thumbnail() {
@@ -154,6 +162,25 @@ function maybe_add_category_args( $args, $category, $operator, $include_children
 		return $args;
 	}
 
+add_action( 'wp_ajax_get_cart_count', 'basketCount' );
+add_action( 'wp_ajax_nopriv_get_cart_count', 'basketCount' );
+function basketCount(){
+$items = WC()->cart->get_cart();
+$basket_data = WC()->session->get('custom_basket');
+$excludes = $basket_data['composites'];
+		if($items) {
+
+			    foreach($items as $item => $values) { 
+			       	if (!in_array($values['data']->id, $excludes)) {  
+			       		if(($values['data']->product_type == 'bundle')|| ($values['data']->virtual == "yes")) continue;    	
+			       		$prodsize = (get_field('product_size', $values['data']->id)) ? get_field('product_size', $values['data']->id) : 1 ; 
+			       		$current_quantity = $current_quantity + ($values['quantity'] * $prodsize);
+			       	}
+			    }  
+			}
+	echo $current_quantity;
+	die();
+}
 
 add_action( 'wp_ajax_remove_product', 'remove_product' );
 add_action( 'wp_ajax_nopriv_remove_product', 'remove_product' );
